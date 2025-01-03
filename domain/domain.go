@@ -16,7 +16,7 @@ type Criminal struct {
 type Criminals []Criminal
 
 // Средний возраст по выборке
-func getAvargeAge(criminals Criminals) (avargeAge int) {
+func GetAvargeAge(criminals Criminals) (avargeAge int) {
 	for _, c := range criminals {
 		avargeAge += int(c.Age)
 	}
@@ -25,7 +25,7 @@ func getAvargeAge(criminals Criminals) (avargeAge int) {
 }
 
 // Наиболее часто встречающееся преступление
-func getMostCommonCrime(criminals Criminals) (mostCommonCrime string) {
+func GetMostCommonCrime(criminals Criminals) (mostCommonCrime string) {
 	if len(criminals) == 0 {
 		panic("getMostCommonCrime get empty criminals")
 	}
@@ -48,7 +48,7 @@ func getMostCommonCrime(criminals Criminals) (mostCommonCrime string) {
 }
 
 // Наиболее часто встречающееся пол преступника
-func getMostCommonGender(criminals Criminals) (mostCommonGender string) {
+func GetMostCommonGender(criminals Criminals) (mostCommonGender string) {
 	if len(criminals) == 0 {
 		panic("getMostCommonGender get empty criminals")
 	}

@@ -101,3 +101,32 @@ func stringToCriminal(s []string) (c *domain.Criminal) {
 	}
 	return createCriminal(s[0], age, s[2], s[3], s[4], s[5], s[6])
 }
+
+func FindStatisticInfo(statisicType int) (out string) {
+	var criminals = getAllCriminals()
+	switch statisicType {
+	case 1:
+		out = strconv.Itoa(domain.GetAvargeAge(criminals))
+	case 2:
+		out = domain.GetMostCommonCrime(criminals)
+	case 3:
+		out = domain.GetMostCommonGender(criminals)
+	}
+	return
+}
+
+func getAllCriminals() domain.Criminals {
+	data, err := csvRepository.ReadAllCSV()
+	if err != nil {
+		panic(err)
+	}
+	var c domain.Criminals
+	for _, s := range data[0:] {
+		age, err := strconv.Atoi(s[1])
+		if err != nil {
+			age = 0
+		}
+		c = append(c, *createCriminal(s[0], age, s[2], s[3], s[4], s[5], s[6]))
+	}
+	return c
+}

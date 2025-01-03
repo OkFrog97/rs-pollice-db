@@ -7,7 +7,7 @@ import (
 
 func main() {
 	fmt.Println("База Данных Полиции Racoon City")
-	const helloMessage = "1. Распечатать Базу Данных\n2. Добавить преступника\n3. Найти преступника по ФИО\n5. Выйти"
+	const helloMessage = "1. Распечатать Базу Данных\n2. Добавить преступника\n3. Найти преступника по ФИО\n4. Статистика\n5. Выйти"
 	exit := false
 	for !exit {
 		fmt.Println(helloMessage)
@@ -65,7 +65,17 @@ func main() {
 			findedCriminal := CriminalService.FindByName(name)
 			fmt.Println(findedCriminal)
 		} else if w1 == "4" {
-			fmt.Println("Статистическая информация")
+			const statisicMessage = "Статистическая информация\n1. Средний Возраст\n2. Часто встречающееся преступление\n3. Часто встречающийся пол"
+			fmt.Println(statisicMessage)
+
+			var w1 int
+			fmt.Print("Значение: ")
+			fmt.Scan(&w1)
+			fmt.Println()
+
+			findedData := CriminalService.FindStatisticInfo(w1)
+			fmt.Println("Вывод: ", findedData)
+
 		} else if w1 == "5" {
 			exit = true
 		}
