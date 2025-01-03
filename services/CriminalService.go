@@ -6,14 +6,15 @@ import (
 	"reflect"
 	"rs-police-db/domain"
 	csvRepository "rs-police-db/repository"
+	"strconv"
 )
 
-func AddCriminalToTable(name string, age uint, gender string, crimeDate string, crimeType string, crimeDescription string, status string) {
+func AddCriminalToTable(name string, age int, gender string, crimeDate string, crimeType string, crimeDescription string, status string) {
 	c := createCriminal(name, age, gender, crimeDate, crimeType, crimeDescription, status)
 	saveCriminal(*c)
 }
 
-func createCriminal(name string, age uint, gender string, crimeDate string, crimeType string, crimeDescription string, status string) *domain.Criminal {
+func createCriminal(name string, age int, gender string, crimeDate string, crimeType string, crimeDescription string, status string) *domain.Criminal {
 	return &domain.Criminal{
 		Name:             name,
 		Age:              age,
@@ -61,12 +62,12 @@ func printTable(data csvRepository.Table) {
 	}
 }
 
-func FindByName(name string) []string {
+func FindByName(name string) *domain.Criminal {
 	row, err := findByField("name", name)
 	if err != nil {
 		panic(err)
 	}
-	return row
+	return stringToCriminal(row)
 }
 
 func findByField(field string, searchValue string) ([]string, error) {
@@ -91,4 +92,12 @@ func findByField(field string, searchValue string) ([]string, error) {
 		}
 	}
 	return nil, errors.New("Searching field not found")
+}
+
+func stringToCriminal(s []string) (c *domain.Criminal) {
+	age, err := strconv.Atoi(s[1])
+	if err != nil {
+		age = 0
+	}
+	return createCriminal(s[0], age, s[2], s[3], s[4], s[5], s[6])
 }

@@ -5,7 +5,7 @@ import "maps"
 // Add more clean types for age sex
 type Criminal struct {
 	Name             string
-	Age              uint
+	Age              int
 	Gender           string
 	CrimeDate        string
 	CrimeType        string

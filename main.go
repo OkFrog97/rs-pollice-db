@@ -23,7 +23,7 @@ func main() {
 			fmt.Scan(&name)
 			fmt.Println()
 
-			var age uint
+			var age int
 			fmt.Print("Возраст: ")
 			fmt.Scan(&age)
 			fmt.Println()
@@ -62,7 +62,8 @@ func main() {
 			fmt.Scan(&name)
 			fmt.Println()
 
-			fmt.Println(CriminalService.FindByName(name))
+			findedCriminal := CriminalService.FindByName(name)
+			fmt.Println(findedCriminal)
 		} else if w1 == "4" {
 			fmt.Println("Статистическая информация")
 		} else if w1 == "5" {
